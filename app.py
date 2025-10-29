@@ -54,29 +54,4 @@ def dns_callback():
 @app.route('/results', methods=['GET'])
 def results():
     try:
-        with open('events.log', 'r') as f:
-            events = [json.loads(line) for line in f]
-        return jsonify(events)
-    except:
-        return jsonify([])
-
-@app.route('/health', methods=['GET'])
-def health():
-    return jsonify({'status': 'healthy'})
-
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port)
-```
-Click **"Commit new file"**
-
-**File 2: `requirements.txt`** (Add file → Create new file)
-```
-flask==3.0.0
-gunicorn==21.2.0
-```
-Click **"Commit new file"**
-
-**File 3: `Procfile`** (Add file → Create new file, name exactly `Procfile` - no extension)
-```
-web: gunicorn app:app
+        with open
