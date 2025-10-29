@@ -46,7 +46,7 @@ def dns_callback():
     }
     
     log_event(event_data)
-    print(f"🚨🚨🚨 PAYLOAD EXECUTED 🚨🚨🚨")
+    print(f"🚨 PAYLOAD EXECUTED")
     print(f"User: {event_data['user']} @ {event_data['computer']}")
     
     return '', 204
@@ -54,4 +54,16 @@ def dns_callback():
 @app.route('/results', methods=['GET'])
 def results():
     try:
-        with open
+        with open('events.log', 'r') as f:
+            events = [json.loads(line) for line in f]
+        return jsonify(events)
+    except:
+        return jsonify([])
+
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({'status': 'healthy'})
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port)
